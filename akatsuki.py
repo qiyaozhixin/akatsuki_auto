@@ -54,7 +54,7 @@ def infinite_tower(round = 2022):
 
     count = 0
     while count < round:
-        re = player.find_touch_any(['challenge_1', 'challenge_2'])
+        re = player.find_touch_any(['challenge_1', 'challenge_2', 'daily_close_1'])
         if re == 'challenge_1' or re == 'challenge_2':
             print('进入关卡')
             time.sleep(3)
@@ -78,6 +78,19 @@ def infinite_tower(round = 2022):
                     print('获取奖励')
                     time.sleep(12)
                     flag3 = 1
+
+        elif re == 'daily_close_1':
+            print('每日刷新')
+            time.sleep(12)
+            re3 = player.find_touch_any(['infinite_tower_prize'])
+            if re3 == 'daily_prize':
+                print('获取签到奖励')
+                time.sleep(12)
+            re4 = player.find_touch_any(['daily_close_2'])
+            if re4 == 'daily_close_2':
+                print('关闭签到奖励')
+                time.sleep(12)
+                
         else:
             print('正在战斗中')
             time.sleep(30)
