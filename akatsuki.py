@@ -144,7 +144,7 @@ def infinite_tower_key(round = 2022):
         elif re == 'daily_close_1':
             print('每日刷新')
             time.sleep(12)
-            re3 = player.find_touch_any(['infinite_tower_prize'])
+            re3 = player.find_touch_any(['daily_prize'])
             if re3 == 'daily_prize':
                 print('获取签到奖励')
                 time.sleep(12)
