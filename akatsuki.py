@@ -1,5 +1,6 @@
 import time, os
 import auto_player as player
+from datetime import datetime
 
 def get_pictures():   
     player.screen_shot()
@@ -157,6 +158,82 @@ def infinite_tower_key(round = 2022):
             print('正在战斗中')
             time.sleep(30)
 
+
+def da_luan_dou():
+    flag1 = 0
+    while flag1 == 0:
+        re = player.find_touch_any(['explore'])
+        if re == 'explore':
+            flag1 = 1
+            print('进入探索')
+            time.sleep(2)
+        else:
+            print('请返回游戏主界面')
+            time.sleep(2)
+    flag2 = 0
+    while flag2 == 0:
+        re = player.find_touch_any(['battle_training'])
+        if re == 'battle_training':
+            flag2 = 1
+            print('进入战斗训练')
+            time.sleep(2)
+        else:
+            print('请返回探索界面')
+            time.sleep(12)
+    flag3 = 0
+    while flag3 == 0:
+        re = player.find_touch_any(['daluandou_1', 'daluandou_2'])
+        if re == 'daluandou_1' or re == 'daluandou_2':
+            flag3 = 1
+            print('进入大乱斗')
+            time.sleep(2)
+        else:
+            print('请返回战斗训练界面')
+            time.sleep(12)
+    day_week = datetime.now().weekday()
+    day_week_output = day_week + 1
+    if day_week == 0:
+        player.find_touch_any(['daluandou_yue'])
+    elif day_week == 1:
+        player.find_touch_any(['daluandou_huo'])
+    elif day_week == 3:
+        player.find_touch_any(['daluandou_mu'])
+    elif day_week == 4:
+        player.find_touch_any(['daluandou_jin'])
+    elif day_week == 5:
+        player.find_touch_any(['daluandou_tu'])
+    elif day_week == 6:
+        player.find_touch_any(['daluandou_ri'])
+    else:
+        print('今天是星期' + str(day_week_output))
+        print('今天没有大乱斗')
+        menu()
+    time.sleep(2)
+    print('今天是星期' + str(day_week_output))
+
+    while True:
+        re = player.find_touch_any(['luandou_new'])
+        if re == 'luandou_new':
+            print('进入关卡')
+            time.sleep(2)
+            player.find_touch_any(['luandou_challenge'])
+            time.sleep(12)
+
+        flag4 = 0
+        while flag4 == 0:
+            re2 = player.find_touch_any(['skip'])
+            if re2 == 'skip':
+                print('结束战斗')
+                time.sleep(12)
+            else:
+                print('战斗进行中')
+                time.sleep(30)
+            re3 = player.find_touch_any(['luandou_prize'])
+            if re3 == 'luandou_prize':
+                print('获取奖励')
+                time.sleep(3)
+                flag4 = 1
+
 def menu(debug=False):
 
     menu_list = [
@@ -165,6 +242,7 @@ def menu(debug=False):
     [airship_collect, '你游自动收菜'],
     [infinite_tower, '自动挂塔(15/30分钟自动消耗钥匙)(已废弃)'],
     [infinite_tower_key, '自动挂塔(内测版)'],
+    [da_luan_dou, '大乱斗'],
     ]
 
     start_time = time.time()
