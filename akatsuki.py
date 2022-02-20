@@ -218,6 +218,9 @@ def da_luan_dou():
             time.sleep(2)
             player.find_touch_any(['luandou_challenge'])
             time.sleep(12)
+        elif re is None:
+            print('今日大乱斗已完成')
+            back_to_main()
 
         flag4 = 0
         while flag4 == 0:
@@ -228,11 +231,94 @@ def da_luan_dou():
             else:
                 print('战斗进行中')
                 time.sleep(30)
-            re3 = player.find_touch_any(['luandou_prize'])
+            re3 = player.find_touch_any(['luandou_prize', 'luandou_clear'])
             if re3 == 'luandou_prize':
                 print('获取奖励')
                 time.sleep(3)
                 flag4 = 1
+            elif re3 == 'luandou_clear':
+                print('乱斗通关')
+                time.sleep(2)
+                player.find_touch_any(['luandou_final_prize'])
+                time.sleep(2)
+                player.find_touch_any(['luandou_final_prize'])
+                time.sleep(2)
+
+def nacht():
+    flag1 = 0
+    while flag1 == 0:
+        re = player.find_touch_any(['explore'])
+        if re == 'explore':
+            flag1 = 1
+            print('进入探索')
+            time.sleep(2)
+        else:
+            print('请返回游戏主界面')
+            time.sleep(2)
+    flag2 = 0
+    while flag2 == 0:
+        re = player.find_touch_any(['battle_training'])
+        if re == 'battle_training':
+            flag2 = 1
+            print('进入战斗训练')
+            time.sleep(2)
+        else:
+            print('请返回探索界面')
+            time.sleep(12)
+    flag3 = 0
+    while flag3 == 0:
+        re = player.find_touch_any(['training_event_1', 'training_event_2'])
+        if re == 'training_event_1' or re == 'training_event_2':
+            flag3 = 1
+            print('进入大乱斗')
+            time.sleep(2)
+        else:
+            print('请返回战斗训练界面')
+            time.sleep(12)
+
+    while True:
+        re = player.find_touch_any(['luandou_new'])
+        if re == 'luandou_new':
+            print('进入关卡')
+            time.sleep(2)
+            player.find_touch_any(['luandou_challenge'])
+            time.sleep(12)
+        elif re is None:
+            print('今日奋斗记已完成')
+            back_to_main()
+
+        flag4 = 0
+        while flag4 == 0:
+            re2 = player.find_touch_any(['skip', 'skip_2'])
+            if re2 == 'skip':
+                print('结束战斗')
+                time.sleep(12)
+            elif re2 == 'skip_2':
+                print('跳过剧情')
+                time.sleep(2)
+            else:
+                print('战斗进行中')
+                time.sleep(30)
+            re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
+            if re3 == 'luandou_prize':
+                print('获取奖励')
+                time.sleep(3)
+                flag4 = 1
+            elif re3 == 'luandou_clear':
+                print('乱斗通关')
+                time.sleep(2)
+                player.find_touch_any(['luandou_final_prize'])
+                time.sleep(2)
+
+def back_to_main():
+    while True:
+        re = player.find_touch_any(['back'])
+        if re == 'back':
+            print('返回上一层')
+            time.sleep(2)
+        elif re is None:
+            print('已回到主界面')
+            menu()
 
 def menu(debug=False):
 
@@ -243,6 +329,7 @@ def menu(debug=False):
     [infinite_tower, '自动挂塔(15/30分钟自动消耗钥匙)(已废弃)'],
     [infinite_tower_key, '自动挂塔(内测版)'],
     [da_luan_dou, '大乱斗'],
+    [nacht, '男主奋斗记'],
     ]
 
     start_time = time.time()
