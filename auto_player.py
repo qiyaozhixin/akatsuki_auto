@@ -91,6 +91,25 @@ def load_imgs():
     return imgs
 imgs = load_imgs()
 
+# #100%缩放
+# def load_imgs_2():
+#     imgs = {}
+#     treshold = accuracy
+#     path = wanted_path
+#     file_list = os.listdir(path)
+#
+#     for file in file_list:
+#         name = file.split('.')[0]
+#         file_path = path + '/' + file
+#         img = cv2.imread(file_path)
+#         x,y = img.size
+#         img = img.resize(x*0.8, y*0.8)
+#         a = [ img , treshold, name]
+#         imgs[name] = a
+#
+#     return imgs
+# imgs = load_imgs_2()
+
  #在背景查找目标图片，以列表形式返回查找目标的中心坐标，
  #screen是截屏图片，wanted是找的图片【按上面load_imgs的格式】，show是否以图片形式显示匹配结果【调试用】
 def locate(screen, wanted, show=0):

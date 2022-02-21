@@ -231,7 +231,7 @@ def da_luan_dou():
             else:
                 print('战斗进行中')
                 time.sleep(30)
-            re3 = player.find_touch_any(['luandou_prize', 'luandou_clear'])
+            re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
             if re3 == 'luandou_prize':
                 print('获取奖励')
                 time.sleep(3)
@@ -243,6 +243,7 @@ def da_luan_dou():
                 time.sleep(2)
                 player.find_touch_any(['luandou_final_prize'])
                 time.sleep(2)
+                flag4 = 1
 
 def nacht():
     flag1 = 0
@@ -309,6 +310,7 @@ def nacht():
                 time.sleep(2)
                 player.find_touch_any(['luandou_final_prize'])
                 time.sleep(2)
+                flag4 = 1
 
 def back_to_main():
     while True:
