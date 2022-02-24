@@ -241,7 +241,7 @@ def da_luan_dou():
                 time.sleep(2)
                 player.find_touch_any(['luandou_final_prize'])
                 time.sleep(2)
-                player.find_touch_any(['luandou_final_prize'])
+                player.find_touch_any(['luandou_final_prize_2'])
                 time.sleep(2)
                 flag4 = 1
 
