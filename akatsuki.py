@@ -271,7 +271,7 @@ def nacht():
         re = player.find_touch_any(['training_event_1', 'training_event_2'])
         if re == 'training_event_1' or re == 'training_event_2':
             flag3 = 1
-            print('进入大乱斗')
+            print('进入奋斗记')
             time.sleep(2)
         else:
             print('请返回战斗训练界面')
@@ -306,11 +306,82 @@ def nacht():
                 time.sleep(3)
                 flag4 = 1
             elif re3 == 'luandou_clear':
-                print('乱斗通关')
+                print('奋斗记通关')
                 time.sleep(2)
                 player.find_touch_any(['luandou_final_prize'])
                 time.sleep(2)
                 flag4 = 1
+
+def weekend():
+    flag1 = 0
+    while flag1 == 0:
+        re = player.find_touch_any(['explore'])
+        if re == 'explore':
+            flag1 = 1
+            print('进入探索')
+            time.sleep(2)
+        else:
+            print('请返回游戏主界面')
+            time.sleep(2)
+    flag2 = 0
+    while flag2 == 0:
+        re = player.find_touch_any(['battle_training'])
+        if re == 'battle_training':
+            flag2 = 1
+            print('进入战斗训练')
+            time.sleep(2)
+        else:
+            print('请返回探索界面')
+            time.sleep(12)
+    flag3 = 0
+    while flag3 == 0:
+        re = player.find_touch_any(['training_event_1', 'training_event_2'])
+        if re == 'training_event_1' or re == 'training_event_2':
+            flag3 = 1
+            print('进入周末本')
+            time.sleep(2)
+        else:
+            print('请返回战斗训练界面')
+            time.sleep(12)
+
+    dif_list = ['wk_easy', 'wk_normal', 'wk_hard', 'wk_nightmare']
+    for img in dif_list:
+        player.find_touch_any([img])
+        time.sleep(2)
+
+        while True:
+            re = player.find_touch_any(['luandou_new'])
+            if re == 'luandou_new':
+                print('进入关卡')
+                time.sleep(2)
+                player.find_touch_any(['luandou_challenge'])
+                time.sleep(12)
+            elif re is None:
+                print('本级难度已完成')
+                time.sleep(2)
+                break
+
+            flag4 = 0
+            while flag4 == 0:
+                re2 = player.find_touch_any(['skip'])
+                if re2 == 'skip':
+                    print('结束战斗')
+                    time.sleep(12)
+                else:
+                    print('战斗进行中')
+                    time.sleep(30)
+                re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
+                if re3 == 'luandou_prize':
+                    print('获取奖励')
+                    time.sleep(3)
+                    flag4 = 1
+                elif re3 == 'luandou_clear':
+                    print('本级难度通关')
+                    time.sleep(2)
+                    player.find_touch_any(['luandou_final_prize'])
+                    time.sleep(2)
+                    flag4 = 1
+    back_to_main()
 
 def back_to_main():
     while True:
@@ -325,13 +396,14 @@ def back_to_main():
 def menu(debug=False):
 
     menu_list = [
-    [get_pictures, '获取当前屏幕截图'],
-    [auto_play_akatsuki, '你游自动收菜测试'],   
-    [airship_collect, '你游自动收菜'],
-    [infinite_tower, '自动挂塔(15/30分钟自动消耗钥匙)(已废弃)'],
-    [infinite_tower_key, '自动挂塔(内测版)'],
-    [da_luan_dou, '大乱斗'],
-    [nacht, '男主奋斗记'],
+    # [get_pictures, '获取当前屏幕截图'],
+    # [auto_play_akatsuki, '你游自动收菜测试'],
+    # [airship_collect, '你游自动收菜'],
+    # [infinite_tower, '自动挂塔(15/30分钟自动消耗钥匙)(已废弃)'],
+    [infinite_tower_key, '自动挂塔'],
+    [da_luan_dou, '自动大乱斗(保证初始AP大于40以全部完成)'],
+    [nacht, '自动男主奋斗记(保证初始AP大于25以全部完成)'],
+    [weekend, '自动周末本(保证初始AP大于230以全部完成)'],
     ]
 
     start_time = time.time()
