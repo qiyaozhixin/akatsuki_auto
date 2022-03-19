@@ -191,6 +191,8 @@ def da_luan_dou():
             print('请返回战斗训练界面')
             time.sleep(12)
     day_week = datetime.now().weekday()
+    if datetime.now().hour < 5:
+        day_week -= 1
     day_week_output = day_week + 1
     if day_week == 0:
         player.find_touch_any(['daluandou_yue'])
@@ -209,7 +211,7 @@ def da_luan_dou():
         print('今天没有大乱斗')
         menu()
     time.sleep(2)
-    print('今天是星期' + str(day_week_output))
+    print('今天打星期' + str(day_week_output) + '的大乱斗')
 
     while True:
         re = player.find_touch_any(['luandou_new'])
@@ -374,6 +376,9 @@ def weekend():
                 if re3 == 'luandou_prize':
                     print('获取奖励')
                     time.sleep(3)
+                    if img == 'wk_nightmare':
+                        player.find_touch_any(['luandou_final_prize_2'])
+                        time.sleep(2)
                     flag4 = 1
                 elif re3 == 'luandou_clear':
                     print('本级难度通关')
