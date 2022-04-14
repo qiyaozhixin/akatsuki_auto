@@ -79,7 +79,7 @@ def infinite_tower(round = 2022):
                     time.sleep(12)
                 else:
                     print('战斗进行中')
-                    time.sleep(30)
+                    time.sleep(12)
                 re2 = player.find_touch_any(['infinite_tower_prize'])
                 if re2 == 'infinite_tower_prize':
                     print('获取奖励')
@@ -135,7 +135,7 @@ def infinite_tower_key(round = 2022):
                     time.sleep(12)
                 else:
                     print('战斗进行中')
-                    time.sleep(30)
+                    time.sleep(12)
                 re2 = player.find_touch_any(['infinite_tower_prize'])
                 if re2 == 'infinite_tower_prize':
                     print('获取奖励')
@@ -232,7 +232,7 @@ def da_luan_dou():
                 time.sleep(12)
             else:
                 print('战斗进行中')
-                time.sleep(30)
+                time.sleep(12)
             re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
             if re3 == 'luandou_prize':
                 print('获取奖励')
@@ -301,7 +301,7 @@ def nacht():
                 time.sleep(2)
             else:
                 print('战斗进行中')
-                time.sleep(30)
+                time.sleep(12)
             re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
             if re3 == 'luandou_prize':
                 print('获取奖励')
@@ -371,7 +371,7 @@ def weekend():
                     time.sleep(12)
                 else:
                     print('战斗进行中')
-                    time.sleep(30)
+                    time.sleep(12)
                 re3 = player.find_touch_any(['luandou_clear', 'luandou_prize'])
                 if re3 == 'luandou_prize':
                     print('获取奖励')
@@ -388,6 +388,102 @@ def weekend():
                     flag4 = 1
     back_to_main()
 
+def raid():
+    endraid = 0
+    while True:
+        flag1 = 0
+        while flag1 == 0:
+            re = player.find_touch_any(['event'])
+            if re == 'event':
+                flag1 = 1
+                print('进入活动')
+                time.sleep(2)
+            else:
+                print('请返回游戏主界面')
+                time.sleep(2)
+        flag2 = 0
+        while flag2 == 0:
+            re = player.find_touch_any(['raid_battle'])
+            if re == 'raid_battle':
+                flag2 = 1
+                print('进入raid')
+                time.sleep(12)
+            else:
+                print('请返回活动界面')
+                time.sleep(12)
+        flag3 = 0
+        while flag3 == 0:
+            re = player.find_touch_any(['collect_yes_raid_reward', 'raid_ready'])
+            if re == 'collect_yes_raid_reward':
+                flag3 = 1
+                print('收取昨日raid奖励')
+                time.sleep(5)
+                player.find_touch_any(['damage_ok'])
+                print('确认伤害')
+                time.sleep(3)
+                player.find_touch_any(['raid_prize'])
+                print('收取奖励')
+                time.sleep(3)
+                player.find_touch_any(['luandou_final_prize_2'])
+                print('收取奖励')
+                time.sleep(3)
+                player.find_touch_any(['raid_ready'])
+                print('准备！')
+                time.sleep(5)
+                player.find_touch_any(['raid_go'])
+                print('出击！')
+                time.sleep(3)
+            elif re == 'raid_ready':
+                flag3 = 1
+                print('准备！')
+                time.sleep(5)
+                player.find_touch_any(['raid_go'])
+                print('出击！')
+                time.sleep(3)
+
+                re22 = player.find_touch_any(['infinite_tower_cancel'])
+                if re22 == 'infinite_tower_cancel':
+                    print('今日raid打完了')
+                    endraid = 1
+                    time.sleep(3)
+            else:
+                print('进入raid失败')
+                time.sleep(5)
+
+        if endraid==1:
+            print('打完了打完了！')
+            break
+
+        flag5=0
+        while flag5 == 0:
+            result=player.find_touch_any(['set_battle'])
+            if result == 'set_battle':
+                time.sleep(3)
+                print('切换至半自动')
+                player.find_touch_any(['set_battle'])
+                time.sleep(3)
+                print('切换至自动')
+                flag5 = 1
+            print('等待进入战斗...')
+            time.sleep(12)
+
+        flag4 = 0
+        while flag4 == 0:
+            re2 = player.find_touch_any(['skip'])
+            if re2 == 'skip':
+                print('结束战斗')
+                time.sleep(12)
+            else:
+                print('战斗进行中')
+                time.sleep(12)
+            re3 = player.find_touch_any(['infinite_tower_prize'])
+            if re3 == 'infinite_tower_prize':
+                print('获取奖励')
+                time.sleep(3)
+                flag4 = 1
+        back_to_main_no_menu()
+    back_to_main()
+
 def back_to_main():
     while True:
         re = player.find_touch_any(['back'])
@@ -397,6 +493,16 @@ def back_to_main():
         elif re is None:
             print('已回到主界面')
             menu()
+
+def back_to_main_no_menu():
+    while True:
+        re = player.find_touch_any(['back'])
+        if re == 'back':
+            print('返回上一层')
+            time.sleep(2)
+        elif re is None:
+            print('已回到主界面')
+            break
 
 def menu(debug=False):
 
@@ -409,6 +515,7 @@ def menu(debug=False):
     [da_luan_dou, '自动大乱斗(保证初始AP大于40以全部完成)'],
     [nacht, '自动男主奋斗记(保证初始AP大于25以全部完成)'],
     [weekend, '自动周末本(保证初始AP大于230以全部完成)'],
+    [raid, '自动raid'],
     ]
 
     start_time = time.time()
